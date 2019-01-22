@@ -1,7 +1,7 @@
 //This is reliant on Promises. If you want to use this, you'll need to (ironically!) polyfill Promises first... or at least until I can work out how to polyfill promises dynamically
 
-//Example polyfill requirements and 3rd party script
-var mayneedpolyfilling = ['IntersectionObserver', 'dialog']; //features that your script relies on
+//Example polyfill requirements and 3rd party script (in this case, Google's quicklink)
+var mayneedpolyfilling = ['IntersectionObserver', 'Object.assign']; //features that your script relies on - these two aren't supported in IE
 var scriptiwannause = 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js'; //the script that you want to use
 
 window.onload = function pageLoaded() {
@@ -12,7 +12,7 @@ window.onload = function pageLoaded() {
 				.then( 
 				function() {
 					console.log('Aha! your script is now loaded! Initialising...');
-					//quicklink();
+					//quicklink(); //Initiate your script here!
 					console.log("Et voila! You're up and running!");
 				}
 			).catch(function(error){return error})
