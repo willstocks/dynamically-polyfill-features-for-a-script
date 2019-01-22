@@ -26,10 +26,6 @@ Deployment steps:
 
 * Vanilla Javascript - no framework dependencies!
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on the code of conduct, and the process for submitting pull requests.
-
 ## Versioning
 
 For the versions available, see the [tags on this repository](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/tags). 
@@ -39,6 +35,10 @@ For the versions available, see the [tags on this repository](https://github.com
 * **Will Stocks** - *Initial work* - [willstocks-tech](https://github.com/willstocks-tech)
 
 See also the list of [contributors](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/contributors) who have participated in this little nugget!
+
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the code of conduct, and the process for submitting pull requests.
 
 ## License
 
