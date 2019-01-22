@@ -1,6 +1,6 @@
 # Dynamically polyfill features for a script
 
-A little script that allows you to only polyfill when absolutely necessary - no wasted requests on browsers that have native support! :D
+A little script that allows you to only polyfill when absolutely necessary - no wasted requests on browsers that have native support! 😆🤓
 
 ## Getting Started
 
