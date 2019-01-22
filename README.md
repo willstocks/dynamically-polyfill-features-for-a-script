@@ -42,6 +42,7 @@ See also the list of [contributors](https://github.com/willstocks-tech/dynamical
 
 ## License
 
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/LICENSE.md) file for details
 
 ## Acknowledgments
 
