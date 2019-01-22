@@ -1,10 +1,10 @@
 # Dynamically polyfill features for a script
 
-Project description goes here
+A little script that allows you to only polyfill when absolutely necessary - no wasted requests on browsers that have native support! :D
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
@@ -13,12 +13,13 @@ Make sure you know what features your script is reliant on and polyfill those no
 ### Installing
 
 
-## Running the tests
+## Running tests
 
 
 ## Deployment
 
 Deployment steps:
+
 1.
 
 ## Built With
@@ -27,7 +28,7 @@ Deployment steps:
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on the code of conduct, and the process for submitting pull requests.
 
 ## Versioning
 
@@ -37,12 +38,12 @@ For the versions available, see the [tags on this repository](https://github.com
 
 * **Will Stocks** - *Initial work* - [willstocks-tech](https://github.com/willstocks-tech)
 
-See also the list of [contributors](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/contributors) who have participated in this little nugget!
 
 ## License
 
 
 ## Acknowledgments
 
-* 
+* [PurpleBooth](https://gist.github.com/PurpleBooth) for this awesome README template!
 
