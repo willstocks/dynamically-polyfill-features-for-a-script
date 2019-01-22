@@ -1,8 +1,10 @@
 //This is reliant on Promises. If you want to use this, you'll need to (ironically!) polyfill Promises first... or at least until I can work out how to polyfill promises dynamically
 
+//Example polyfill requirements and 3rd party script
+var mayneedpolyfilling = ['IntersectionObserver', 'dialog']; //features that your script relies on
+var scriptiwannause = 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js'; //the script that you want to use
+
 window.onload = function pageLoaded() {
-	var mayneedpolyfilling = ['IntersectionObserver', 'dialog']; //features that your script relies on
-	var scriptiwannause = 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js'; //the script that you want to use
 	Promise.all([checkNativeSupport(mayneedpolyfilling)])
 		.then( 
 		function() {
