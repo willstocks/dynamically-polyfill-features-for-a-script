@@ -4,23 +4,19 @@ A little script that allows you to only polyfill when absolutely necessary - no 
 
 ## Getting Started
 
-See deployment for notes on how to deploy the project on a live system.
+See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
 Make sure you know what features your script is reliant on and polyfill those not natively supported on the browsers you support (you can check https://caniuse.com/).
 
-### Installing
-
-
-## Running tests
-
-
 ## Deployment
 
 Deployment steps:
 
-1.
+1. Copy the contents of [dynamicpolyfill.js](dynamicpolyfill.js).
+2. Paste at the bottom of your existing .js file (if you have one).
+3. Amend the top two variables to list the features that you may need to polyfill, and the script you want to use.
 
 ## Built With
 
