@@ -1,8 +1,9 @@
 //This is reliant on Promises. If you want to use this, you'll need to (ironically!) polyfill Promises first... or at least until I can work out how to polyfill promises dynamically
 
 //Example polyfill requirements and 3rd party script
-var mayneedpolyfill = ['IntersectionObserver', 'Object.assign']; //features that your script relies on - these two aren't supported in IE for example
-var scriptiwanttouse = 'https://cdn.allaroundtheworld.com/packagename/version/scriptname.min.js'; //the script that you want to use
+var mayneedpolyfill = ["Example.Feature1","ExampleFeature2"]; //features that your script relies on - these two aren't supported in IE for example
+var scriptiwanttouse = "https://cdn.example.com/packagename/version/scriptname.min.js"; //the script that you want to use
+function initialiseMyScript() {functiontorunwhenscriptisloaded();}
 
 window.onload = function pageLoaded() {
 	Promise.all([checkNativeSupport(mayneedpolyfill)])
@@ -12,7 +13,7 @@ window.onload = function pageLoaded() {
 				.then( 
 				function() {
 					console.log("As the script is ready, let's initialise it...");
-					scriptiwanttouseexamplefunction(); //Initialise the script you want to use here!
+					initialiseMyScript();
 					console.log("Et voila! The script is running - wooooo!");
 				}
 			).catch(function(error){return error})
@@ -40,8 +41,7 @@ function loadMyScript(url) {
 	return new Promise(
 		function(resolve, reject) {
 			var thescript = document.createElement('script');
-			thescript.src = encodeURI(url); //URL here
-			//thescript.defer = true;
+			thescript.src = encodeURI(url);
 			document.getElementsByTagName('body')[0].appendChild(thescript);
 			console.log('Loading ',thescript.src,'!');
 			thescript.onerror = function(response) {
