@@ -2,6 +2,8 @@
 
 A little script that allows you to only polyfill when absolutely necessary - no wasted requests on browsers that have native support! 😆🤓
 
+This script is about 2.9KB **un**minified _(1.1KB **un**minified and gzipped)_ or 1.2KB minified _(580B minified and gzipped)_, so it's fairly lightweight. :smile:
+
 ## Getting Started
 
 See [deployment](#deployment) for notes on how to deploy the project on a live system.
