@@ -16,9 +16,13 @@ Make sure you know what features your script is reliant on and polyfill those no
 
 Deployment steps:
 
-1. Copy the contents of [dynamicpolyfill.js](dynamicpolyfill.js).
+1. Copy the contents of [dynamicpolyfill.js](dynamicpolyfill.js) (or [dynamicpolyfill.min.js](dynamicpolyfill.min.js)).
 2. Paste at the bottom of your existing .js file (if you have one).
-3. Amend the top two variables to list the features that you may need to polyfill, and the script you want to use.
+3. Amend the first three "variables" to list the features that you may need to polyfill, the URL to the script you want to use and the function to kick off usage of that script.
+
+	1. `var mayneedpolyfill` - this is an array of features that may need polyfilling. Some examples are: `IntersectionObserver` or `Object.assign` which I use for implementing [quicklink](https://github.com/GoogleChromeLabs/quicklink) on my site.
+	2. `var scriptiwanttouse` - this is the actual script that you want to use. Sometimes third party, sometimes self-hosted, doesn't matter either way!
+	3. `function initialiseMyScript()` - this is where the script (ii) actually gets run. Using my own implementation of this as an example, I have `function initialiseMyScript() {quicklink();}`. The only bit that needs changing is the function within the `{ }`!
 
 ## Built With
 
