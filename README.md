@@ -29,7 +29,7 @@ Deployment steps:
 
 ## Versioning
 
-For the versions available, see the [tags on this repository](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/tags). 
+For the versions available, check out the [repo release history](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/releases). I'd recommend sticking to the "latest release" though!
 
 ## Authors
 
