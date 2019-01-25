@@ -1,13 +1,11 @@
-//This is reliant on Promises. If you want to use this, you'll need to (ironically!) polyfill Promises first... or at least until I can work out how to polyfill promises dynamically
-
-var staticScript = false; //CDN default = false. Set to true if you want direct control via the below variables.
+var staticScript = true; //CDN usage passes a "false". Set to true if you want direct control via the below variables.
 
 function dynamicPolyfill (features, scriptURL, initFunction, staticScript) {
-	if(staticScript = true) {
-		var polyfillFeatures = ["Example.Feature1","ExampleFeature2"]; //features that your script relies on - these two aren't supported in IE for example
-		var scriptToPolyfill = "https://cdn.example.com/packagename/version/scriptname.min.js"; //the script that you want to use
-		function initialiseMyScript() {RENAMETOYOURFUNCTION();} //the function you call once the polyfills are loaded
-		window.onload = pageLoaded(polyfillFeatures, scriptToPolyfill); //will kick everything off once window is loaded
+	if(staticScript == true) {
+		var polyfillFeatures = ["Example.Feature1","ExampleFeature2"]; 
+		var scriptToPolyfill = "https://cdn.example.com/packagename/version/scriptname.min.js";
+		function initialiseMyScript() {RENAMETOYOURFUNCTION();}
+		window.onload = pageLoaded(polyfillFeatures, scriptToPolyfill);
 	} else {
 		var polyfillFeatures = features;
 		var scriptToPolyfill = scriptURL;
@@ -37,14 +35,19 @@ function pageLoaded(polyfillFeatures, scriptToPolyfill) {
 }
 
 function checkNativeSupport(tocheck) {
-	var num = tocheck.length //cache value out of the for loop
-	for (var i = 0; i < num; i++) {
+	var check = tocheck.length; //cache value out of the for loop
+	var polyfillNeeded = [];
+	for (var i = 0; i < check; i++) {
 		if (tocheck[i] in window || 'window.'&tocheck[i]) {
 			console.log(tocheck[i],'has native support');
 		} else {
 			console.warn("Ahhh, your browser doesn't support",tocheck[i],". I'm gonna have to polyfill it so stuff works. Hang on one sec!");
-			loadPolyfill(tocheck[i]);	
+			polyfillNeeded.push(tocheck[i]);
 		}
+	}
+	var polyfill = polyfillNeeded.length;
+	if (polyfill > 0) {
+		return loadPolyfill(polyfillNeeded);
 	}
 }
 
