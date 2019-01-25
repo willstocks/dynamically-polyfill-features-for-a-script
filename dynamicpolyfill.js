@@ -39,11 +39,11 @@ function pageLoaded(polyfillFeatures, scriptToPolyfill) {
 function checkNativeSupport(tocheck) {
 	var num = tocheck.length //cache value out of the for loop
 	for (var i = 0; i < num; i++) {
-		if (tocheck[i] in window || 'window.',tocheck[i]) {
+		if (tocheck[i] in window || 'window.'&tocheck[i]) {
 			console.log(tocheck[i],'has native support');
 		} else {
 			console.warn("Ahhh, your browser doesn't support",tocheck[i],". I'm gonna have to polyfill it so stuff works. Hang on one sec!");
-			return loadPolyfill(tocheck[i]);	
+			loadPolyfill(tocheck[i]);	
 		}
 	}
 }
