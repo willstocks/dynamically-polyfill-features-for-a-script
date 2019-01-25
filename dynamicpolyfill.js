@@ -1,15 +1,26 @@
 //This is reliant on Promises. If you want to use this, you'll need to (ironically!) polyfill Promises first... or at least until I can work out how to polyfill promises dynamically
 
-//Example polyfill requirements and 3rd party script
-var mayneedpolyfill = ["Example.Feature1","ExampleFeature2"]; //features that your script relies on - these two aren't supported in IE for example
-var scriptiwanttouse = "https://cdn.example.com/packagename/version/scriptname.min.js"; //the script that you want to use
-function initialiseMyScript() {functiontorunwhenscriptisloaded();}
+var staticScript = false; //CDN default = false. Set to true if you want direct control via the below variables.
 
-window.onload = function pageLoaded() {
-	Promise.all([checkNativeSupport(mayneedpolyfill)])
+function dynamicPolyfill (features, scriptURL, initFunction, staticScript) {
+	if(staticScript = true) {
+		var polyfillFeatures = ["Example.Feature1","ExampleFeature2"]; //features that your script relies on - these two aren't supported in IE for example
+		var scriptToPolyfill = "https://cdn.example.com/packagename/version/scriptname.min.js"; //the script that you want to use
+		function initialiseMyScript() {RENAMETOYOURFUNCTION();} //the function you call once the polyfills are loaded
+		window.onload = pageLoaded(polyfillFeatures, scriptToPolyfill); //will kick everything off once window is loaded
+	} else {
+		var polyfillFeatures = features;
+		var scriptToPolyfill = scriptURL;
+		function initialiseMyScript() {initFunction}
+		return pageLoaded(polyfillFeatures, scriptToPolyfill);
+	}
+}
+
+function pageLoaded(polyfillFeatures, scriptToPolyfill) {
+	Promise.all([checkNativeSupport(polyfillFeatures)])
 		.then( 
 		function() {
-			loadMyScript(scriptiwanttouse)
+			loadMyScript(scriptToPolyfill)
 				.then( 
 				function() {
 					console.log("As the script is ready, let's initialise it...");
@@ -19,7 +30,7 @@ window.onload = function pageLoaded() {
 			).catch(function(error){return error})
 		}
 	).catch(function(error){return error})
-	,function () {
+		,function () {
 		console.error("There was an issue polyfilling",mayneedpolyfill," which means that I can't preload future pages for you. Sorry! :(");
 		console.warn("If you want this to work, I'd recommend upgrading to a browser that supports",mayneedpolyfill,"natively. You can find out which browsers do by visting: https://caniuse.com/");
 	}
