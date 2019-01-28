@@ -2,7 +2,7 @@
 ![](https://img.shields.io/github/release/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=latest%20release) 
 ![](https://img.shields.io/github/release-pre/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=latest%20beta) 
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/issues) 
-![](https://img.shields.io/github/languages/top/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=javascript&logo=languages&colorB=#f1e05a) 
+![](https://img.shields.io/github/languages/top/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=javascript&logo=languages&colorB=f1e05a) 
 [![Maintainability](https://api.codeclimate.com/v1/badges/8d00c9006111c5360102/maintainability)](https://codeclimate.com/github/willstocks-tech/dynamically-polyfill-features-for-a-script/maintainability) 
 ![](https://img.shields.io/github/license/willstocks-tech/dynamically-polyfill-features-for-a-script.svg) 
 
