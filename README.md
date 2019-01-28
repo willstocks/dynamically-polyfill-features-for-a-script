@@ -13,35 +13,26 @@ See [deployment](#deployment) for notes on how to deploy the project on a live s
 Make sure you know what features your script is reliant on and polyfill those not natively supported on the browsers you support (you can check https://caniuse.com/).
 
 ## Deployment
-
-### Self-hosted:
-
-1. Copy the contents of [dynamicpolyfill.js](dynamicpolyfill.js) (or [dynamicpolyfill.min.js](dynamicpolyfill.min.js)).
-2. Paste at the bottom of your existing .js file (if you have one).
-3. Change `var staticScript = false;` (`var n=false;` minified) to `var staticScript = true;`.
-4. Add `dynamicPolyfill();` to line 4 (or straight after `var n=true;` when using minified).
-5. Lines 7, 8 and 9 then need amending to list the features that you may need to polyfill, the URL to the script you want to use and the function to kick off usage of that script.
-	1. Line 7: `var polyfillFeatures` (`var i` in .min.js) - this is an array (`[]`) of features that may need polyfilling. Some examples are: `IntersectionObserver` or `Object.assign` which I use for implementing [quicklink](https://github.com/GoogleChromeLabs/quicklink) on my site.
-	2. `var scriptToPolyfill` (`var r` in .min.js) - this is the actual script that you want to use. Sometimes third party, sometimes self-hosted, doesn't matter either way!
-	3. `function initialiseMyScript()` (`function u()` in .min.js) - this is where the script (ii) actually gets run. Using my own implementation of this as an example, I have `function initialiseMyScript() {quicklink();}`. The only bit that needs changing is the function name within the `{ }`!
 	
 ### Loading from CDN:
 1. Add a <script></script> tag linking to this script
-	1. Example: `<script src='https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js'></script>`
+	1. Example: `<script src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js'></script>`
 2. Add an `onLoad` attribute to the tag calling the `dynamicPolyfill()` function and passing your parameters
 	1. Note: the first parameter is the feature polyfills you want to pass. This is expected as an array.
 	1. Note: the second paramter is the URL of the script you want to use. This is expected as a string.
 	1. Note: the third parameter is the function that you would run once the script has loaded. This is expected as a string.
-	1. Note: there is a 4th parameter, however for CDN usage this is unused.
+	1. Note: the 4th parameter is a `true`/`false` flag. If using a CDN you need to set the flag to `false`.
 
-#### Full CDN example: 
+#### Full CDN example script tag: 
 ```
 <script
 	type='text/javascript' 
-	src='https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js' 
-	onload='dynamicPolyfill(["IntersectionObserver"], 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'quicklink();')'>
+	src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js' 
+	onload='dynamicPolyfill( ["IntersectionObserver"], 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'quicklink();', false )'>
 </script>
 ```
+
+Note: You need to ensure that before you call the `dynamicPolyfill()` function that the actual script itself has loaded. If you're going to host the script yourself (rather than calling out to a CDN), make sure you include the script code first, then call the function. You can do this in the same manner as above, but replace the CDN URL with the path to your own JS file!
 
 ## Built With
 
