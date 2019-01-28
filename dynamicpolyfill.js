@@ -43,9 +43,7 @@ function checkNativeSupport(tocheck) {
 		var split = pol.split(splitChars);
 		var firstWord = window[split[0]];
 		var lastWord = new Object(split[split.length - 1]);
-		if ((typeof (window.pol) !== 'undefined' || pol in window)) {
-			console.log(pol,'has native support');
-		} else if (pol.indexOf(splitChars) >= 1 && lastWord in firstWord) {
+		if (typeof (window.pol) !== 'undefined' || pol in window || (pol.indexOf(splitChars) >= 1 && lastWord in firstWord)) {
 			console.log(pol,'has native support');
 		} else {
 			console.warn("Ahhh, your browser doesn't support",tocheck[i],". I'm gonna have to polyfill it so stuff works. Hang on one sec!");
