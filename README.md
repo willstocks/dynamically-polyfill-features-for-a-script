@@ -1,8 +1,17 @@
+[![](https://data.jsdelivr.com/v1/package/gh/willstocks-tech/dynamically-polyfill-features-for-a-script/badge?style=rounded)](https://www.jsdelivr.com/package/gh/willstocks-tech/dynamically-polyfill-features-for-a-script) 
+![](https://img.shields.io/github/release/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=latest%20release) 
+![](https://img.shields.io/github/release-pre/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=latest%20beta) 
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/issues) 
+![](https://img.shields.io/github/languages/top/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=javascript&logo=languages) 
+[![Maintainability](https://api.codeclimate.com/v1/badges/8d00c9006111c5360102/maintainability)](https://codeclimate.com/github/willstocks-tech/dynamically-polyfill-features-for-a-script/maintainability) 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8d00c9006111c5360102/test_coverage)](https://codeclimate.com/github/willstocks-tech/dynamically-polyfill-features-for-a-script/test_coverage) 
+![](https://img.shields.io/github/license/willstocks-tech/dynamically-polyfill-features-for-a-script.svg) 
+
 # Dynamically polyfill features for a script
 
-A little script that allows you to only polyfill when absolutely necessary - no wasted requests on browsers that have native support! 😆🤓
+A little script that allows you to only polyfill a feature when absolutely necessary - no wasted requests on browsers that have native support! 😆🤓
 
-This script is about 2.9KB **un**minified _(1.1KB **un**minified and gzipped)_ or 1.2KB minified _(580B minified and gzipped)_, so it's fairly lightweight. :smile:
+This script is ~3.51KB **un**minified _(1.29KB **un**minified and gzipped)_ or ~1.8KB minified _(891B minified and gzipped)_, so it's _fairly_ light. :smile:
 
 ## Getting Started
 
@@ -13,15 +22,26 @@ See [deployment](#deployment) for notes on how to deploy the project on a live s
 Make sure you know what features your script is reliant on and polyfill those not natively supported on the browsers you support (you can check https://caniuse.com/).
 
 ## Deployment
+	
+### Loading from CDN:
+1. Add a <script></script> tag linking to this script
+	1. Example: `<script src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js'></script>`
+2. Add an `onLoad` attribute to the tag calling the `dynamicPolyfill()` function and passing your parameters
+	1. Note: the first parameter is the feature polyfills you want to pass. This is expected as an array.
+	1. Note: the second paramter is the URL of the script you want to use. This is expected as a string.
+	1. Note: the third parameter is the function that you would run once the script has loaded. This is expected as a string.
+	1. Note: the 4th parameter is a `true`/`false` flag. If using a CDN you need to set the flag to `false`.
 
-Deployment steps:
+#### Full CDN example script tag: 
+```
+<script
+	type='text/javascript' 
+	src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js' 
+	onload='dynamicPolyfill( ["IntersectionObserver"], 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'quicklink();', false )'>
+</script>
+```
 
-1. Copy the contents of [dynamicpolyfill.js](dynamicpolyfill.js) (or [dynamicpolyfill.min.js](dynamicpolyfill.min.js)).
-2. Paste at the bottom of your existing .js file (if you have one).
-3. Amend the first three "variables" to list the features that you may need to polyfill, the URL to the script you want to use and the function to kick off usage of that script.
-	1. `var mayneedpolyfill` (`var n` in .min.js) - this is an array of features that may need polyfilling. Some examples are: `IntersectionObserver` or `Object.assign` which I use for implementing [quicklink](https://github.com/GoogleChromeLabs/quicklink) on my site.
-	2. `var scriptiwanttouse` (`var e` in .min.js) - this is the actual script that you want to use. Sometimes third party, sometimes self-hosted, doesn't matter either way!
-	3. `function initialiseMyScript()` (`function t()` in .min.js) - this is where the script (ii) actually gets run. Using my own implementation of this as an example, I have `function initialiseMyScript() {quicklink();}`. The only bit that needs changing is the function within the `{ }`!
+Note: You need to ensure that before you call the `dynamicPolyfill()` function that the actual script itself has loaded. If you're going to host the script yourself (rather than calling out to a CDN), make sure you include the script code first, then call the function. You can do this in the same manner as above, but replace the CDN URL with the path to your own JS file!
 
 ## Built With
 
