@@ -4,7 +4,6 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/issues) 
 ![](https://img.shields.io/github/languages/top/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=javascript&logo=languages) 
 [![Maintainability](https://api.codeclimate.com/v1/badges/8d00c9006111c5360102/maintainability)](https://codeclimate.com/github/willstocks-tech/dynamically-polyfill-features-for-a-script/maintainability) 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/8d00c9006111c5360102/test_coverage)](https://codeclimate.com/github/willstocks-tech/dynamically-polyfill-features-for-a-script/test_coverage) 
 ![](https://img.shields.io/github/license/willstocks-tech/dynamically-polyfill-features-for-a-script.svg) 
 
 # Dynamically polyfill features for a script
