@@ -35,18 +35,24 @@ function pageLoaded(polyfillFeatures, scriptToPolyfill) {
 }
 
 function checkNativeSupport(tocheck) {
-	var check = tocheck.length; //cache value out of the for loop
+	var num = tocheck.length; //cache value out of the for loop
 	var polyfillNeeded = [];
-	for (var i = 0; i < check; i++) {
-		if (tocheck[i] in window || 'window.'&tocheck[i]) {
-			console.log(tocheck[i],'has native support');
+	for (var i = 0; i < num; i++) {
+		var pol = tocheck[i];
+		var splitChars = '.';
+		var split = pol.split(splitChars);
+		var firstWord = window[split[0]];
+		var lastWord = new Object(split[split.length - 1]);
+		if ((typeof (window.pol) !== 'undefined' || pol in window)) {
+			console.log(pol,'has native support');
+		} else if (pol.indexOf(splitChars) >= 1 && lastWord in firstWord) {
+			console.log(pol,'has native support');
 		} else {
 			console.warn("Ahhh, your browser doesn't support",tocheck[i],". I'm gonna have to polyfill it so stuff works. Hang on one sec!");
 			polyfillNeeded.push(tocheck[i]);
 		}
 	}
-	var polyfill = polyfillNeeded.length;
-	if (polyfill > 0) {
+	if (polyfillNeeded.length > 0) {
 		return loadPolyfill(polyfillNeeded);
 	}
 }
