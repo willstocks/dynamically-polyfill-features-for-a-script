@@ -1,14 +1,17 @@
-[![](https://data.jsdelivr.com/v1/package/gh/willstocks-tech/dynamically-polyfill-features-for-a-script/badge?style=rounded)](https://www.jsdelivr.com/package/gh/willstocks-tech/dynamically-polyfill-features-for-a-script)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/issues)
-![](https://img.shields.io/github/languages/top/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=javascript&logo=languages)
-[![Maintainability](https://api.codeclimate.com/v1/badges/8d00c9006111c5360102/maintainability)](https://codeclimate.com/github/willstocks-tech/dynamically-polyfill-features-for-a-script/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/8d00c9006111c5360102/test_coverage)](https://codeclimate.com/github/willstocks-tech/dynamically-polyfill-features-for-a-script/test_coverage)
+[![](https://data.jsdelivr.com/v1/package/gh/willstocks-tech/dynamically-polyfill-features-for-a-script/badge?style=rounded)](https://www.jsdelivr.com/package/gh/willstocks-tech/dynamically-polyfill-features-for-a-script) 
+![](https://img.shields.io/github/release/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=latest%20release) 
+![](https://img.shields.io/github/release-pre/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=latest%20beta) 
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/issues) 
+![](https://img.shields.io/github/languages/top/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=javascript&logo=languages) 
+[![Maintainability](https://api.codeclimate.com/v1/badges/8d00c9006111c5360102/maintainability)](https://codeclimate.com/github/willstocks-tech/dynamically-polyfill-features-for-a-script/maintainability) 
+[![Test Coverage](https://api.codeclimate.com/v1/badges/8d00c9006111c5360102/test_coverage)](https://codeclimate.com/github/willstocks-tech/dynamically-polyfill-features-for-a-script/test_coverage) 
+![](https://img.shields.io/github/license/willstocks-tech/dynamically-polyfill-features-for-a-script.svg) 
 
 # Dynamically polyfill features for a script
 
 A little script that allows you to only polyfill a feature when absolutely necessary - no wasted requests on browsers that have native support! 😆🤓
 
-This script is ~3.2KB **un**minified _(1.19KB **un**minified and gzipped)_ or ~1.6KB minified _(813B minified and gzipped)_, so it's fairly light. :smile:
+This script is ~3.51KB **un**minified _(1.29KB **un**minified and gzipped)_ or ~1.8KB minified _(891B minified and gzipped)_, so it's _fairly_ light. :smile:
 
 ## Getting Started
 
