@@ -1,8 +1,8 @@
 # Dynamically polyfill features for a script
 
-A little script that allows you to only polyfill when absolutely necessary - no wasted requests on browsers that have native support! 😆🤓
+A little script that allows you to only polyfill a feature when absolutely necessary - no wasted requests on browsers that have native support! 😆🤓
 
-This script is about 2.9KB **un**minified _(1.1KB **un**minified and gzipped)_ or 1.2KB minified _(580B minified and gzipped)_, so it's fairly lightweight. :smile:
+This script is ~3.2KB **un**minified _(1.19KB **un**minified and gzipped)_ or ~1.6KB minified _(813B minified and gzipped)_, so it's fairly light. :smile:
 
 ## Getting Started
 
