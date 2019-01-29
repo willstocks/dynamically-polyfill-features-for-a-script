@@ -45,6 +45,7 @@ Note: You need to ensure that before you call the `dynamicPolyfill()` function t
 ## Built With
 
 * Vanilla Javascript - no framework dependencies!
+* [Polyfill.io](https://github.com/Financial-Times/polyfill-library) - for the actual polyfills!
 
 ## Versioning
 
