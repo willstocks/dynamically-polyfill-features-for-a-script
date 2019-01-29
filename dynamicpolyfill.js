@@ -21,9 +21,7 @@ function pageLoaded(polyfillFeatures, scriptToPolyfill) {
 			loadMyScript(scriptToPolyfill)
 				.then( 
 				function() {
-					console.log("As the script is ready, let's initialise it...");
 					initialiseMyScript();
-					console.log("Et voila! The script is running - wooooo!");
 				}
 			).catch(function(error){return error})
 		}
@@ -43,11 +41,10 @@ function checkNativeSupport(tocheck) {
 		var split = pol.split(splitChars);
 		var firstWord = window[split[0]];
 		var lastWord = new Object(split[split.length - 1]);
-		if (typeof (window.pol) !== 'undefined' || pol in window || (pol.indexOf(splitChars) >= 1 && lastWord in firstWord)) {
+		if (typeof (window.pol) !== 'undefined' || pol in window || (pol.indexOf(splitChars) >= 1 && lastWord in firstWord) || pol in this) {
 			console.log(pol,'has native support');
 		} else {
-			console.warn("Ahhh, your browser doesn't support",tocheck[i],". I'm gonna have to polyfill it so stuff works. Hang on one sec!");
-			polyfillNeeded.push(tocheck[i]);
+			polyfillNeeded.push(pol);
 		}
 	}
 	if (polyfillNeeded.length > 0) {
@@ -61,13 +58,10 @@ function loadMyScript(url) {
 			var thescript = document.createElement('script');
 			thescript.src = encodeURI(url);
 			document.getElementsByTagName('body')[0].appendChild(thescript);
-			console.log('Loading ',thescript.src,'!');
 			thescript.onerror = function(response) {
-				console.error ('Loading the script failed!');
 				return reject("Loading the script failed!", response);
 			} 
 			thescript.onload = function() {
-				console.log("Script setup and ready to load!");
 				return resolve("Script setup and ready to load!");
 			} 
 		}
@@ -80,13 +74,10 @@ function loadPolyfill(url) {
 			var polyfill = document.createElement('script');
 			polyfill.src = ('https://polyfill.io/v3/polyfill.min.js?features='+encodeURIComponent(url));
 			document.getElementsByTagName('body')[0].appendChild(polyfill);
-			console.log('Grabbing',url,'polyfill from: ', polyfill.src);
 			polyfill.onerror = function(response) {
-				console.error ('Loading the polyfill(s) failed!');
 				return reject("Loading the polyfill(s) failed!", response);
 			} 
 			polyfill.onload = function() {
-				console.log("Polyfill(s) loaded!");
 				return resolve("Polyfill(s) loaded!");
 			}
 		}
