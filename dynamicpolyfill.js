@@ -4,12 +4,16 @@ function dynamicPolyfill (features, scriptURL, initFunction, staticScript) {
 	if(staticScript == false) {
 		var polyfillFeatures = features;
 		var scriptToPolyfill = scriptURL;
-		function initialiseMyScript() {initFunction}
+		function initialiseMyScript() {
+			initFunction
+		}
 		return pageLoaded(polyfillFeatures, scriptToPolyfill);
 	} else {
 		var polyfillFeatures = ["Example.Feature1","ExampleFeature2"]; 
 		var scriptToPolyfill = "https://cdn.example.com/packagename/version/scriptname.min.js";
-		function initialiseMyScript() {RENAMETOYOURFUNCTION();}
+		function initialiseMyScript() {
+			RENAMETOYOURFUNCTION();
+		}
 		window.onload = pageLoaded(polyfillFeatures, scriptToPolyfill);
 	}
 }
