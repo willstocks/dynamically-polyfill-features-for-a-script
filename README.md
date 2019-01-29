@@ -23,7 +23,7 @@ Make sure you know what features your script is reliant on and polyfill those no
 ## Deployment
 	
 ### Loading from CDN:
-1. Add a <script></script> tag linking to this script
+1. Add a `<script></script>` tag linking to this script
 	1. Example: `<script src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js'></script>`
 2. Add an `onLoad` attribute to the tag calling the `dynamicPolyfill()` function and passing your parameters
 	1. Note: the first parameter is the feature polyfills you want to pass. This is expected as an array.
