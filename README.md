@@ -36,7 +36,7 @@ Make sure you know what features your script is reliant on and polyfill those no
 <script
 	type='text/javascript' 
 	src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js' 
-	onload='dynamicPolyfill( ["IntersectionObserver"], 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'quicklink();', false )'>
+	onload='dynamicPolyfill( ["IntersectionObserver", "Object.assign"], 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'quicklink();', false )'>
 </script>
 ```
 
