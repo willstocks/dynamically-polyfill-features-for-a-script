@@ -1,32 +1,19 @@
 //This file includes a bunch of console.log()/console.error()/console.warn() messages. Aides with troubleshooting, but is also a little fun if someone happens to come across them. They're not necessary at all tho'!
-
-var staticScript; //CDN usage passes a "false". Set to true if you want direct control via the below variables.
-
-function dynamicPolyfill (features, scriptURL, initFunction, staticScript) {
-	if(staticScript == false) {
+function dynamicPolyfill (features, scriptURL, initFunction) {
 		var polyfillFeatures = features;
 		var scriptToPolyfill = scriptURL;
-		function initialiseMyScript() {initFunction}
-		return pageLoaded(polyfillFeatures, scriptToPolyfill);
-	} else {
-		var polyfillFeatures = ["Example.Feature1","ExampleFeature2"]; 
-		var scriptToPolyfill = "https://cdn.example.com/packagename/version/scriptname.min.js";
-		function initialiseMyScript() {RENAMETOYOURFUNCTION();}
-		window.onload = pageLoaded(polyfillFeatures, scriptToPolyfill);
-	}
+		var functionToRunonLoad = initFunction;
+		return pageLoaded(polyfillFeatures, scriptToPolyfill, functionToRunonLoad);
 }
 
-function pageLoaded(polyfillFeatures, scriptToPolyfill) {
+function pageLoaded(polyfillFeatures, scriptToPolyfill, functionToRunonLoad) {
 	Promise.all([checkNativeSupport(polyfillFeatures)])
 		.then( 
 		function() {
 			loadMyScript(scriptToPolyfill)
 				.then( 
-				function() {
 					console.log("As the script is ready, let's initialise it...");
-					initialiseMyScript();
-					console.log("Et voila! The script is running - wooooo!");
-				}
+					initialiseMyScript(functionToRunonLoad)
 			).catch(function(error){return error})
 		}
 	).catch(function(error){return error})
@@ -74,6 +61,11 @@ function loadMyScript(url) {
 			} 
 		}
 	)
+}
+
+function initialiseMyScript(functionToRunonLoad) {
+	console.log("The following script will now be initialised:", functionToRunonLoad);
+	return new Function(functionToRunonLoad);
 }
 
 function loadPolyfill(url) {
