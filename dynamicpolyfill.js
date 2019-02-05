@@ -6,26 +6,23 @@ function dynamicPolyfill (features, scriptURL, initFunction) {
 }
 
 function pageLoaded(polyfillFeatures, scriptToPolyfill, functionToRunonLoad) {
-	Promise.all([checkNativeSupport(polyfillFeatures)])
-		.then( 
-		function() {
-			loadMyScript(scriptToPolyfill)
-				.then( 
+Promise.all([checkNativeSupport(polyfillFeatures), loadMyScript(scriptToPolyfill)])
+			.then( 
+				function() {
 					initialiseMyScript(functionToRunonLoad)
-			).catch(function(error){return error})
-		}
-	).catch(function(error){return error})
-		,function () {
-		console.error("There was an issue polyfilling",mayneedpolyfill," which means that I can't preload future pages for you. Sorry! :(");
-		console.warn("If you want this to work, I'd recommend upgrading to a browser that supports",mayneedpolyfill,"natively. You can find out which browsers do by visting: https://caniuse.com/");
-	}
+				}
+		).catch(function(error){return error})
+	,function () {
+	console.error("There was an issue polyfilling",mayneedpolyfill," which means that I can't preload future pages for you. Sorry! :(");
+	console.warn("If you want this to work, I'd recommend upgrading to a browser that supports",mayneedpolyfill,"natively. You can find out which browsers do by visting: https://caniuse.com/");
+}
 }
 
 function checkNativeSupport(tocheck) {
-	var num = tocheck.length; //cache value out of the for loop
+	var polen = tocheck.length; //cache value out of the for loop
 	var polyfillNeeded = [];
-	for (var i = 0; i < num; i++) {
-		var pol = tocheck[i];
+	for (var p = 0; p < polen; p++) {
+		var pol = tocheck[p];
 		var splitChars = '.';
 		var split = pol.split(splitChars);
 		var firstWord = window[split[0]];
@@ -42,38 +39,66 @@ function checkNativeSupport(tocheck) {
 }
 
 function loadMyScript(url) {
-	if(url !== null && url !== '') {
-		return new Promise(
-			function(resolve, reject) {
-				var thescript = document.createElement('script');
-				thescript.src = encodeURI(url);
-				document.getElementsByTagName('body')[0].appendChild(thescript);
-				thescript.onerror = function(response) {
-					return reject("Loading the script failed!", response);
-				} 
-				thescript.onload = function() {
-					return resolve("Script setup and ready to load!");
-				} 
+	if(Array.isArray(url)) {
+		var urlen = url.length;
+		console.log(urlen);
+		for (var u = 0; u < urlen; u++) {
+			var uri = url[u];
+			if(uri !== null && uri !== '') {
+				return new Promise(
+					function(resolve, reject) {
+						var thescript = document.createElement('script');
+						thescript.src = encodeURI(uri);
+						document.body.appendChild(thescript);
+						thescript.onerror = function(response) {
+							return reject("Loading the script failed!", response);
+						} 
+						thescript.onload = function() {
+							return resolve("Script setup and ready to load!");
+						} 
+					}
+				)
+			} else {
+				return new Promise(
+					function(resolve, reject) {
+						return resolve ("No script to load");
+					}
+				)
 			}
-		)
+		}
 	} else {
-		return new Promise(
-			function(resolve, reject) {
-				return resolve ("No script to load");
-			}
-		)
+		if(url !== null && url !== '') {
+			return new Promise(
+				function(resolve, reject) {
+					var thescript = document.createElement('script');
+					thescript.src = encodeURI(url);
+					document.body.appendChild(thescript);
+					thescript.onerror = function(response) {
+						return reject("Loading the script failed!", response);
+					} 
+					thescript.onload = function() {
+						return resolve("Script setup and ready to load!");
+					} 
+				}
+			)
+		} else {
+			return new Promise(
+				function(resolve, reject) {
+					return resolve ("No script to load");
+				}
+			)
+		}
 	}
 }
 
 function initialiseMyScript(functionToRunonLoad) {
-	if(functionToRunonLoad.isArray) {
-		var fnlen = functionToRunonLoad.length
-		for (var n = 0; n < fnlen; n++) {
-			var fn = functionToRunonLoad[n]
-			console.log("The following script will now be initialised:", fn);
-			return new Function(fn);
-		}
-		
+	var fns = [];
+	if(Array.isArray(functionToRunonLoad)) {
+		var fnlen = functionToRunonLoad.length;
+		for (var f = 0; f < fnlen; f++) {
+			var fn = new Function(functionToRunonLoad[f]);
+			try {fn();} catch(err) {console.error('There was an error: ', err.name, err.stack)}
+		}		
 	} else {	
 		console.log("The following script will now be initialised:", functionToRunonLoad);
 		return new Function(functionToRunonLoad);
@@ -85,7 +110,7 @@ function loadPolyfill(url) {
 		function(resolve, reject) {
 			var polyfill = document.createElement('script');
 			polyfill.src = ('https://polyfill.io/v3/polyfill.min.js?features='+encodeURIComponent(url));
-			document.getElementsByTagName('body')[0].appendChild(polyfill);
+			document.body.appendChild(polyfill);
 			polyfill.onerror = function(response) {
 				return reject("Loading the polyfill(s) failed!", response);
 			} 
