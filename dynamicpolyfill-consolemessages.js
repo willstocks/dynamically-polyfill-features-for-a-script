@@ -45,22 +45,31 @@ function checkNativeSupport(tocheck) {
 }
 
 function loadMyScript(url) {
-	return new Promise(
-		function(resolve, reject) {
-			var thescript = document.createElement('script');
-			thescript.src = encodeURI(url);
-			document.getElementsByTagName('body')[0].appendChild(thescript);
-			console.log('Loading ',thescript.src,'!');
-			thescript.onerror = function(response) {
-				console.error ('Loading the script failed!');
-				return reject("Loading the script failed!", response);
-			} 
-			thescript.onload = function() {
-				console.log("Script setup and ready to load!");
-				return resolve("Script setup and ready to load!");
-			} 
-		}
-	)
+	if(url !== null && url !== '') {
+		return new Promise(
+			function(resolve, reject) {
+				var thescript = document.createElement('script');
+				thescript.src = encodeURI(url);
+				document.getElementsByTagName('body')[0].appendChild(thescript);
+				console.log('Loading ',thescript.src,'!');
+				thescript.onerror = function(response) {
+					console.error ('Loading the script failed!');
+					return reject("Loading the script failed!", response);
+				} 
+				thescript.onload = function() {
+					console.log("Script setup and ready to load!");
+					return resolve("Script setup and ready to load!");
+				} 
+			}
+		)
+	} else {
+		return new Promise(
+			function(resolve, reject) {
+				console.log("No script to load!");
+				return resolve ("No script to load");
+			}
+		)
+	}
 }
 
 function initialiseMyScript(functionToRunonLoad) {
