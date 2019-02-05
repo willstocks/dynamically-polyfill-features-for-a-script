@@ -66,8 +66,18 @@ function loadMyScript(url) {
 }
 
 function initialiseMyScript(functionToRunonLoad) {
-	console.log("The following script will now be initialised:", functionToRunonLoad);
-	return new Function(functionToRunonLoad);
+	if(functionToRunonLoad.isArray) {
+		var fnlen = functionToRunonLoad.length
+		for (var n = 0; n < fnlen; n++) {
+			var fn = functionToRunonLoad[n]
+			console.log("The following script will now be initialised:", fn);
+			return new Function(fn);
+		}
+		
+	} else {	
+		console.log("The following script will now be initialised:", functionToRunonLoad);
+		return new Function(functionToRunonLoad);
+	}
 }
 
 function loadPolyfill(url) {
