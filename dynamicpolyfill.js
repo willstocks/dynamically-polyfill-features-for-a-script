@@ -42,19 +42,27 @@ function checkNativeSupport(tocheck) {
 }
 
 function loadMyScript(url) {
-	return new Promise(
-		function(resolve, reject) {
-			var thescript = document.createElement('script');
-			thescript.src = encodeURI(url);
-			document.getElementsByTagName('body')[0].appendChild(thescript);
-			thescript.onerror = function(response) {
-				return reject("Loading the script failed!", response);
-			} 
-			thescript.onload = function() {
-				return resolve("Script setup and ready to load!");
-			} 
-		}
-	)
+	if(url !== null && url !== '') {
+		return new Promise(
+			function(resolve, reject) {
+				var thescript = document.createElement('script');
+				thescript.src = encodeURI(url);
+				document.getElementsByTagName('body')[0].appendChild(thescript);
+				thescript.onerror = function(response) {
+					return reject("Loading the script failed!", response);
+				} 
+				thescript.onload = function() {
+					return resolve("Script setup and ready to load!");
+				} 
+			}
+		)
+	} else {
+		return new Promise(
+			function(resolve, reject) {
+				return resolve ("No script to load");
+			}
+		)
+	}
 }
 
 function initialiseMyScript(functionToRunonLoad) {
