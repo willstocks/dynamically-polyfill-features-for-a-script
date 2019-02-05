@@ -27,7 +27,7 @@ Make sure you know what features your script is reliant on and polyfill those no
 	1. Example: `<script src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js'></script>`
 2. Add an `onLoad` attribute to the tag calling the `dynamicPolyfill()` function and passing your parameters
 	1. Note: the first parameter is the feature polyfills you want to pass. This is expected as an array.
-	1. Note: the second paramter is the URL of the script you want to use. This is expected as a string.
+	1. Note: the second paramter is the URL of the script you want to use. This is expected as a string, but can be blank (`''`) or `null` if you're not loading a third party script.
 	1. Note: the third parameter is the function that you would run once the script has loaded. This is expected as a string.
 	1. Note: the 4th parameter has now been deprecated.
 
