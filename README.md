@@ -10,7 +10,7 @@
 
 A little script that allows you to only polyfill a feature when absolutely necessary - no wasted requests on browsers that have native support! 😆🤓
 
-This script is ~2.64KB **un**minified _(1KB **un**minified and gzipped)_ or ~1.55KB minified _(762B minified and gzipped)_, so it's _fairly_ light. :smile:
+This script is ~3.78KB **un**minified _(1.24KB **un**minified and gzipped)_ or ~2.17KB minified _(889B minified and gzipped)_, so it's _fairly_ light. :smile:
 
 ## Getting Started
 
@@ -27,16 +27,24 @@ Make sure you know what features your script is reliant on and polyfill those no
 	1. Example: `<script src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js'></script>`
 2. Add an `onLoad` attribute to the tag calling the `dynamicPolyfill()` function and passing your parameters
 	1. Note: the first parameter is the feature polyfills you want to pass. This is expected as an array.
-	1. Note: the second paramter is the URL of the script you want to use. This is expected as a string, but can be blank (`''`) or `null` if you're not loading a third party script.
-	1. Note: the third parameter is the function that you would run once the script has loaded. This is expected as a string.
+	1. Note: the second paramter is the URL of the script you want to use. This is expected as a either a `string` or an `array`, but can be blank (`''`) or `null` if you're not loading a third party script.
+	1. Note: the third parameter is the function that you would run once the script has loaded. This is expected as a `string` or an `array` .
 	1. Note: the 4th parameter has now been deprecated.
 
-#### Full CDN example script tag: 
+#### CDN example script tag
+##### String variables:
 ```
 <script
-	type='text/javascript' 
 	src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js' 
 	onload='dynamicPolyfill( ["IntersectionObserver", "Object.assign"], 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'quicklink();')'>
+</script>
+```
+
+##### Array variables:
+```
+<script
+	src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js' 
+	onload='dynamicPolyfill( ["IntersectionObserver", "Object.assign"], ['https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'https://other.cdn.net/script.js'], ['quicklink();', 'otherFunction();'] )'>
 </script>
 ```
 
