@@ -6,16 +6,16 @@ function dynamicPolyfill (features, scriptURL, initFunction) {
 }
 
 function pageLoaded(polyfillFeatures, scriptToPolyfill, functionToRunonLoad) {
-Promise.all([checkNativeSupport(polyfillFeatures), loadMyScript(scriptToPolyfill)])
-			.then( 
-				function() {
-					initialiseMyScript(functionToRunonLoad)
-				}
+	Promise.all([checkNativeSupport(polyfillFeatures), loadMyScript(scriptToPolyfill)])
+		.then( 
+			function() {
+				initialiseMyScript(functionToRunonLoad)
+			}
 		).catch(function(error){return error})
 	,function () {
-	console.error("There was an issue polyfilling",mayneedpolyfill," which means that I can't preload future pages for you. Sorry! :(");
-	console.warn("If you want this to work, I'd recommend upgrading to a browser that supports",mayneedpolyfill,"natively. You can find out which browsers do by visting: https://caniuse.com/");
-}
+		console.error("There was an issue polyfilling",mayneedpolyfill," which means that I can't preload future pages for you. Sorry! :(");
+		console.warn("If you want this to work, I'd recommend upgrading to a browser that supports",mayneedpolyfill,"natively. You can find out which browsers do by visting: https://caniuse.com/");
+	}
 }
 
 function checkNativeSupport(tocheck) {
@@ -41,7 +41,6 @@ function checkNativeSupport(tocheck) {
 function loadMyScript(url) {
 	if(Array.isArray(url)) {
 		var urlen = url.length;
-		console.log(urlen);
 		for (var u = 0; u < urlen; u++) {
 			var uri = url[u];
 			if(uri !== null && uri !== '') {
