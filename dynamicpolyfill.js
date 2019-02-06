@@ -99,8 +99,8 @@ function initialiseMyScript(functionToRunonLoad) {
 			try {fn();console.log(functionToRunonLoad[f], 'initialised successfully');} catch(err) {console.error('There was an error: ', err.name, err.stack)}
 		}			
 	} else {	
-		console.log("The following script will now be initialised:", functionToRunonLoad);
-		return new Function(functionToRunonLoad);
+		var fn = new Function(functionToRunonLoad);
+		try {fn();console.log(functionToRunonLoad, 'initialised successfully');} catch(err) {console.error('There was an error: ', err.name, err.stack)}
 	}
 }
 
