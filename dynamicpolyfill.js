@@ -91,7 +91,6 @@ function loadMyScript(url) {
 }
 
 function initialiseMyScript(functionToRunonLoad) {
-	var fns = [];
 	if(Array.isArray(functionToRunonLoad)) {
 		var fnlen = functionToRunonLoad.length;
 		for (var f = 0; f < fnlen; f++) {
