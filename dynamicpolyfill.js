@@ -38,6 +38,22 @@ function checkNativeSupport(tocheck) {
 	}
 }
 
+function loadPolyfill(url) {
+	return new Promise(
+		function(resolve, reject) {
+			var polyfill = document.createElement('script');
+			polyfill.src = ('https://polyfill.io/v3/polyfill.min.js?features='+encodeURIComponent(url));
+			document.body.appendChild(polyfill);
+			polyfill.onerror = function(response) {
+				return reject("Loading the polyfill(s) failed!", response);
+			} 
+			polyfill.onload = function() {
+				return resolve("Polyfill(s) loaded!");
+			}
+		}
+	)
+}
+
 function loadMyScript(url) {
 	if(Array.isArray(url)) {
 		var urlen = url.length;
@@ -94,27 +110,17 @@ function initialiseMyScript(functionToRunonLoad) {
 	if(Array.isArray(functionToRunonLoad)) {
 		var fnlen = functionToRunonLoad.length;
 		for (var f = 0; f < fnlen; f++) {
-			var fn = new Function(functionToRunonLoad[f]);
-			try {fn();console.log(functionToRunonLoad[f], 'initialised successfully');} catch(err) {console.error('There was an error: ', err.name, err.stack)}
+			try {
+				new Function(functionToRunonLoad[f])();
+			} catch(err) {
+				console.error('There was an error: ', err.name, err.stack);
+			}
 		}			
 	} else {	
-		var fn = new Function(functionToRunonLoad);
-		try {fn();console.log(functionToRunonLoad, 'initialised successfully');} catch(err) {console.error('There was an error: ', err.name, err.stack)}
-	}
-}
-
-function loadPolyfill(url) {
-	return new Promise(
-		function(resolve, reject) {
-			var polyfill = document.createElement('script');
-			polyfill.src = ('https://polyfill.io/v3/polyfill.min.js?features='+encodeURIComponent(url));
-			document.body.appendChild(polyfill);
-			polyfill.onerror = function(response) {
-				return reject("Loading the polyfill(s) failed!", response);
-			} 
-			polyfill.onload = function() {
-				return resolve("Polyfill(s) loaded!");
-			}
+		try {
+			new Function(functionToRunonLoad)();
+		} catch(err) {
+			console.error('There was an error: ', err.name, err.stack);
 		}
-	)
+	}
 }
