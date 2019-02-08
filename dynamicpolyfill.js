@@ -91,21 +91,21 @@ function nonblankURL(uri){
 }
 
 function initialiseMyScript(functionToRunonLoad) {
-	if(Array.isArray(functionToRunonLoad)) { //Check whether array is being passed or just string
-		functionToRunonLoad.forEach( //iterate through the array using Array.forEach()
-			function(functionToRunonLoad){ //pass each item in the array through to the "get script" function
-				try { //attempt to load - using try means we can catch any errors
-					new Function(functionToRunonLoad)(); //convert string to function then execute
-				} catch(err) { //catch any errors trying to run the init function
-					console.error('There was an error: ', err.name, err.stack); //report error to console
-				}
+	if(Array.isArray(functionToRunonLoad)) {
+		functionToRunonLoad.forEach(
+			function(functionToRunonLoad){
+				init(functionToRunonLoad)
 			}
 		)
-    } else { //not an array, just a string
-		try { //attempt to load - using try means we can catch any errors
-			new Function(functionToRunonLoad)(); //convert string to function then execute
-		} catch(err) { //catch any errors trying to run the init function
-			console.error('There was an error: ', err.name, err.stack); //report error to console
+	}	else {	
+		init(functionToRunonLoad)
+	}
+	function init(fn) {
+		try {
+			console.log(fn,"loaded");
+			new Function(fn)();
+		} catch(err) {
+			console.error('There was an error: ', err.name, err.stack);
 		}
 	}
 }
