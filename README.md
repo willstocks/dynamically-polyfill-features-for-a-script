@@ -10,7 +10,7 @@
 
 A little script that allows you to only polyfill a feature when absolutely necessary - no wasted requests on browsers that have native support! 😆🤓
 
-This script is ~3.78KB **un**minified _(1.24KB **un**minified and gzipped)_ or ~2.17KB minified _(889B minified and gzipped)_, so it's _fairly_ light. :smile:
+This script is ~4.76KB **un**minified (with comments!) _(1.52KB **un**minified and gzipped)_ or ~1.15KB minified _(520B minified and gzipped)_, so it's _fairly_ light. :smile:
 
 ## Getting Started
 
@@ -77,4 +77,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * [PurpleBooth](https://gist.github.com/PurpleBooth) for this awesome README template!
 * [Polyfill.io](https://github.com/Financial-Times/polyfill-library) for the awesome polyfill service!
-
