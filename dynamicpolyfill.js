@@ -1,111 +1,122 @@
-function dynamicPolyfill (features, scriptURL, initFunction) {
-	var polyfillFeatures = features; //these are the features that may need polyfilling depending on browser support
-	var scriptToPolyfill = scriptURL; //this is the script(s) that need to be used to execute a function and is dependent on certain feature support
-	var functionToRunonLoad = initFunction; //this is the function(s) that need to be executed, dependent on the above script(s)
-	return pageLoaded(polyfillFeatures, scriptToPolyfill, functionToRunonLoad); //Let's do it...
-}
-
-function pageLoaded(polyfillFeatures, scriptToPolyfill, functionToRunonLoad) {
-	checkNativeSupport(polyfillFeatures) //check whether we need to polyfill anything
-		.then( //if we do or don't, then...
-			loadMyScript(scriptToPolyfill, functionToRunonLoad) //load the scripts and execute their dependent functions
-	).catch( //report any errors during promise
-        function(error){
+function dynamicPolyfill(tocheck, scriptToPolyfill, functionToRunonLoad) {
+	var checkPromises = [];
+	if(Array.isArray(tocheck)) {
+		tocheck.forEach(
+            function(tocheck) {
+			    checkPromises.push(checking(tocheck))
+		    }
+        )
+	} else {
+		checkPromises.push(checking(tocheck))
+	}
+	Promise.all(checkPromises)
+    .then(
+        function() {
+            loadMyScript(scriptToPolyfill, functionToRunonLoad)
+        }
+    )
+    .catch(
+        function(error) {
             return error
         }
-    ) 
+    )
 }
 
-function checkNativeSupport(tocheck) {
-	var polen = tocheck.length; //cache value out of the for loop
-	var polyfillNeeded = [];
-	for (var p = 0; p < polen; p++) { //swap out for Array.forEach or leave as-is?
-		var pol = tocheck[p];
-		var splitChars = '.';
-		var split = pol.split(splitChars);
-		var firstWord = window[split[0]];
-		var lastWord = new Object(split[split.length - 1]);
-		if (typeof (window.pol) !== 'undefined' || pol in window || (pol.indexOf(splitChars) >= 1 && lastWord in firstWord) || pol in this) {
-			console.log(pol,'has native support');
-		} else {
-			polyfillNeeded.push(pol);
-		}
-	}
-	if (polyfillNeeded.length > 0) {
-		return loadPolyfill(polyfillNeeded);
+function checking(check) {
+	var splitChars = '.';
+	var split = check.split(splitChars);
+	var firstWord = window[split[0]];
+	var lastWord = new Object(split[split.length - 1]);
+	if(typeof (window.check) == 'undefined' || !check in window || (check.indexOf(splitChars) >= 1 && !lastWord in firstWord) || !check in this) {
+		loadPolyfill(check);
 	}
 }
 
 function loadPolyfill(url) {
-	return new Promise( //Need to return a promise response
-		function(resolve, reject) { //can resolve or reject, depending on load success or failure
-			var polyfill = document.createElement('script'); //create script element
-			polyfill.src = ('https://polyfill.io/v3/polyfill.min.js?features='+encodeURIComponent(url)); //add the polyfill src value to the aforementioned new script element
-			document.body.appendChild(polyfill); //add the new script to the end of the body tag
-			polyfill.onerror = function(response) { //if the script errors when loading...
-				return reject("Loading the polyfill(s) failed!", response); //... return Promise.reject response
-			} 
-			polyfill.onload = function() { //if the script loads successfully...
-				return resolve("Polyfill(s) loaded!"); //... return Promise.resolve response
-			}
-		}
-	)
+	return new Promise(
+        function(resolve, reject) {
+            var polyfill = document.createElement('script');
+            polyfill.src = ('https://polyfill.io/v3/polyfill.min.js?features=' + encodeURIComponent(url));
+            document.body.appendChild(polyfill);
+            polyfill.onerror = function(response) {
+                return reject("Loading the polyfill(s) failed!", response)
+            }
+            polyfill.onload = function() {
+                return resolve
+            }
+	    }
+    )
 }
 
 function loadMyScript(url, functionToRunonLoad) {
-	if(Array.isArray(url)) { //Check whether array is being passed or just string
-		var promises = []; //Gotta catch 'em all... as an array
-		url.forEach( //iterate through the array using Array.forEach()
-				function(url){ //pass each item in the array through to the "get script" function
-					promises.push(nonblankURL(url)); //push the resolve/reject into the promises array
-				}
-		);
-		Promise.all(promises) //Make sure that all promises that are returned come back as resolved
-				.then( 
-					() => initialiseMyScript(functionToRunonLoad) //run the init function!
-			).catch(function(error){return error}) //report any errors during promise
-	} else if (!Array.isArray(url) && url !== null && url !== '') { //if not an array and not blank values
-		nonblankURL(url) //resolve or reject getting the script
-			.then( 
-				() => initialiseMyScript(functionToRunonLoad) //run the init function!
-			).catch(function(error){return error}) //report any errors during promise
-	} else { //not array, blank values
-		return initialiseMyScript(functionToRunonLoad) //straight to init because no dependency (blank)
+	if(Array.isArray(url)) {
+		var promises = [];
+		url.forEach(
+            function(url) {
+			    promises.push(nonblankURL(url))
+		    }
+        );
+		Promise.all(promises)
+        .then(
+            function() {
+                initialiseMyScript(functionToRunonLoad)
+            }
+        )
+        .catch(
+            function(error) {
+                return error
+            }
+        )
+	}
+	else if (!Array.isArray(url) && url !== null && url !== '') {
+		nonblankURL(url)
+        .then(
+            function() {
+                initialiseMyScript(functionToRunonLoad)
+            }
+        )
+        .catch(
+            function(error) {
+                return error
+            }
+        )
+	} else {
+		initialiseMyScript(functionToRunonLoad)
 	}
 }
 
-function nonblankURL(uri){
-	return new Promise( //Need to return a promise response
-		function(resolve, reject) { //can resolve or reject, depending on load success or failure
-			var thescript = document.createElement('script'); //create script element
-			thescript.src = encodeURI(uri); //add the src value to the aforementioned new script element
-			document.body.appendChild(thescript); //add the new script to the end of the body tag
-			thescript.onerror = function(response) { //if the script errors when loading...
-				return reject("Loading the script failed!", response); //... return Promise.reject response
-			} 
-			thescript.onload = function() { //if the script loads successfully...
-				return resolve(uri); //... return Promise.resolve response
-			} 
-		}
-	)
+function nonblankURL(uri) {
+	return new Promise(
+        function(resolve, reject) {
+            var thescript = document.createElement('script');
+            thescript.src = encodeURI(uri);
+            document.body.appendChild(thescript);
+            thescript.onerror = function(response) {
+                return reject("Loading the script failed!", response)
+            }
+            thescript.onload = function() {
+                return resolve(uri)
+            }
+	    }
+    )
 }
 
 function initialiseMyScript(functionToRunonLoad) {
 	if(Array.isArray(functionToRunonLoad)) {
 		functionToRunonLoad.forEach(
-			function(functionToRunonLoad){
-				init(functionToRunonLoad)
-			}
-		)
-	}	else {	
-		init(functionToRunonLoad)
+            function(functionToRunonLoad) {
+			    initScript(functionToRunonLoad)
+		    }
+        )
+	} else {
+		initScript(functionToRunonLoad)
 	}
-	function init(fn) {
+	function initScript(fn) {
 		try {
-			console.log(fn,"loaded");
-			new Function(fn)();
-		} catch(err) {
-			console.error('There was an error: ', err.name, err.stack);
+			window[fn]
+		}
+		catch (err) {
+			console.error('There was an error: ', err, err.name, err.stack)
 		}
 	}
 }
