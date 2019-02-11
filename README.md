@@ -26,7 +26,10 @@ Make sure you know what features your script is reliant on and polyfill those no
 1. Copy the contents of [dynamicpolyfill.js](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/blob/master/dynamicpolyfill.js)
 1. Paste it into your existing JS file(s)
 1. Add a new line after it and call `dynamicPolyfill();` _Note: Case-sensitive_
-	1. Example: `dynamicPolyfill( ["IntersectionObserver", "Object.assign"], 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'quicklink();')`
+	1. Example: 
+	```
+	dynamicPolyfill( ["IntersectionObserver", "Object.assign"], 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'quicklink();' )
+	```
 2. Add an `onLoad` attribute to the tag calling the `dynamicPolyfill()` function and passing your parameters
 	1. Note: the first parameter is the feature polyfills you want to pass. This is expected as an array.
 	1. Note: the second paramter is the URL of the script you want to use. This is expected as a either a `string` or an `array`, but can be blank (`''`) or `null` if you're not loading a third party script.
@@ -35,7 +38,11 @@ Make sure you know what features your script is reliant on and polyfill those no
 	
 ### Loading from CDN (less recommended):
 1. Add a `<script></script>` tag linking to this script
-	1. Example: `<script src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js'></script>`
+	1. Example: 
+	```
+	<script src='https://cdn.jsdelivr.net/gh/willstocks-tech/dynamically-polyfill-features-for-a-script@master/dynamicpolyfill.min.js'>
+	</script>
+	```
 2. Add an `onLoad` attribute to the tag calling the `dynamicPolyfill()` function and passing your parameters
 	1. Note: the first parameter is the feature polyfills you want to pass. This is expected as an array.
 	1. Note: the second paramter is the URL of the script you want to use. This is expected as a either a `string` or an `array`, but can be blank (`''`) or `null` if you're not loading a third party script.
@@ -50,11 +57,15 @@ Note: Loading from a CDN would still result in a potentially wasted request :dis
 
 ###### String variables
 
-`dynamicPolyfill( 'IntersectionObserver', 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'quicklink();');`
+```
+dynamicPolyfill( 'IntersectionObserver', 'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'quicklink();' );
+```
 
 ##### Array variables
 
-`dynamicPolyfill( ["IntersectionObserver", "Object.assign"], ['https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'https://other.cdn.net/script.js'], ['quicklink();', 'otherFunction();'] );`
+```
+dynamicPolyfill( ["IntersectionObserver", "Object.assign"], ['https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js', 'https://other.cdn.net/script.js'], ['quicklink();', 'otherFunction();'] );
+```
 
 ##### CDN
 
