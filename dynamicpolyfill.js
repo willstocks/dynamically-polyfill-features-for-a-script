@@ -25,14 +25,8 @@ function checking(check) {
     var split = check.split(splitChars);
     var firstWord = window[split[0]];
     var lastWord = new Object(split[split.length - 1]);
-    if (check in window == false || check in this == false) {
-        if (check.indexOf(splitChars) >= 1) {
-            if (lastWord in firstWord == false) {
-                return check
-            }
-        } else {
-            return check
-        }
+    if ((check in window) == false || (check in this) == false || ((check.indexOf(splitChars) >= 1) && (lastWord in firstWord == false))) {
+        return check
     }
 }
 
