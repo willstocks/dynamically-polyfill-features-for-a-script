@@ -25,14 +25,8 @@ function checking(check) {
     var split = check.split(splitChars); //we'll cache any values that can be split based on the splitChars here
     var firstWord = window[split[0]]; //get the first word from the split
     var lastWord = new Object(split[split.length - 1]); //get the last word from the split
-    if (check in window == false || check in this == false) { //check whether the feature is natively supported
-        if (check.indexOf(splitChars) >= 1) { //check whether there are any .'s in what we're checking
-            if (lastWord in firstWord == false) { //if there is, check whether Feature in FeatureParent is natively supported
-                return check //if Feature in FeatureParent is not natively supported, we return the value so we know we need to polyfill
-            }
-        } else {
-            return check //if the feature is not natively supported, we return the value so we know we need to polyfill
-        }
+    if ((check in window) == false || (check in this) == false || ((check.indexOf(splitChars) >= 1) && (lastWord in firstWord == false))) { //check whether the feature is natively supported
+        return check //if the feature is not natively supported, we return the value so we know we need to polyfill
     }
 }
 
