@@ -58,6 +58,7 @@ function loadMyScript(url, functionToRunonLoad) {
         url.forEach(
             function(url) {
                 promises.push(nonblankURL(url))
+            }
         );
         Promise.all(promises)
             .then(
