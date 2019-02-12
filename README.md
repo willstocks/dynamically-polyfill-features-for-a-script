@@ -10,7 +10,7 @@
 
 A little script that allows you to only polyfill a feature when absolutely necessary - no wasted requests on browsers that have native support! 😆🤓
 
-This script is ~2.54KB **un**minified (104 lines) _(841B **un**minified and gzipped)_ or ~1.3KB minified (1 line) _(565B minified and gzipped)_, so it's _fairly_ light. :smile:
+This script is ~3.45KB **un**minified (127 lines) _(930B **un**minified and gzipped)_ or ~1.07KB minified (1 line) _(522B minified and gzipped)_, so it's _fairly_ light. :smile:
 
 ## Getting Started
 
