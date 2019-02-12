@@ -16,7 +16,6 @@ function dynamicPolyfill(tocheck, scriptToPolyfill, functionToRunonLoad) {
                 return p !== undefined
             }
         )
-        .join(' ');
     loadPolyfill(polyfillReq, scriptToPolyfill, functionToRunonLoad);
 }
 
