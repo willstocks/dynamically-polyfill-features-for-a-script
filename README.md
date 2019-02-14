@@ -1,3 +1,4 @@
+[![HitCount](http://hits.dwyl.io/willstocks-tech/dynamically-polyfill-a-script.svg)](http://hits.dwyl.io/willstocks-tech/dynamically-polyfill-a-script)
 [![](https://data.jsdelivr.com/v1/package/gh/willstocks-tech/dynamically-polyfill-features-for-a-script/badge?style=rounded)](https://www.jsdelivr.com/package/gh/willstocks-tech/dynamically-polyfill-features-for-a-script) 
 ![](https://img.shields.io/github/release/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=latest%20release) 
 ![](https://img.shields.io/github/release-pre/willstocks-tech/dynamically-polyfill-features-for-a-script.svg?label=latest%20beta) 
