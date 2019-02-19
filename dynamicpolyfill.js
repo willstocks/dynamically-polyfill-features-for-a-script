@@ -19,14 +19,20 @@ function dynamicPolyfill(tocheck, scriptToPolyfill, functionToRunonLoad) {
     loadPolyfill(polyfillReq, scriptToPolyfill, functionToRunonLoad);
 }
 
-function checking(check) {
-    var splitChars = '.';
-    var split = check.split(splitChars);
-    var firstWord = window[split[0]];
-    var lastWord = new Object(split[split.length - 1]);
-    if ((check in window) == false || (check in this) == false || ((check.indexOf(splitChars) >= 1) && (lastWord in firstWord == false))) {
-        return check
-    }
+function checking(check){
+	var splitChars = '.';
+	var split = check.split(splitChars);
+	var firstWord = window[split[0]];
+	var lastWord = new Object(split[split.length - 1]);
+	if ((check in window) != true || (check in this) != true) {
+		if (check.indexOf(splitChars) >= 1) {
+			if (lastWord in firstWord != true && lastWord in firstWord.prototype != true) {
+				return check;
+			}
+		} else {
+			return check;
+		}
+	}
 }
 
 function loadPolyfill(url, scriptToPolyfill, functionToRunonLoad) {
