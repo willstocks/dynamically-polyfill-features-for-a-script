@@ -1,125 +1,129 @@
+const polyfillio = "https://polyfill.io/v3/polyfill.min.js?features=";
+
 function dynamicPolyfill(tocheck, scriptToPolyfill, functionToRunonLoad) {
-    var polyfillReq = [];
-    if(Array.isArray(tocheck)) {
-        tocheck.forEach(
-            function(tocheck) {
-                polyfillReq.push(checking(tocheck))
-            }
-        )
-    } else {
-        polyfillReq.push(checking(tocheck))
-    }
-    polyfillReq =
-        polyfillReq
-        .filter(
+    if(typeof Promise !== "undefined" || "Promise" in this) {
+        var polyfillReq = [];
+        if(Array.isArray(tocheck)) {
+            tocheck.forEach(
+                function(tocheck) {
+                    polyfillReq.push(checking(tocheck));
+                }
+            );
+        } else {
+            polyfillReq.push(checking(tocheck));
+        }
+        polyfillReq = polyfillReq.filter(
             function(p) {
-                return p !== undefined
+                return p !== undefined;
             }
-        )
-    loadPolyfill(polyfillReq, scriptToPolyfill, functionToRunonLoad);
+        ).join(",");
+        loadPolyfill(polyfillReq, scriptToPolyfill, functionToRunonLoad);
+    } else {
+        promiFill(tocheck, scriptToPolyfill, functionToRunonLoad);
+    }
 }
 
-function checking(check){
-	var splitChars = '.';
-	var split = check.split(splitChars);
-	var firstWord = window[split[0]];
-	var lastWord = new Object(split[split.length - 1]);
-	if ((check in window) != true || (check in this) != true) {
-		if (check.indexOf(splitChars) >= 1) {
-			if (lastWord in firstWord != true && lastWord in firstWord.prototype != true) {
-				return check;
-			}
-		} else {
-			return check;
-		}
-	}
+function promiFill(tocheck, scriptToPolyfill, functionToRunonLoad) {
+    var promPolyfill = document.createElement("script");
+    promPolyfill.src = polyfillio + "Promise";
+    document.body.appendChild(promPolyfill);
+    promPolyfill.onerror = function(response) {
+        console.error("Polyfilling Promise failed", response);
+    };
+    promPolyfill.onload = function() {
+        dynamicPolyfill(tocheck, scriptToPolyfill, functionToRunonLoad);
+    };
+}
+
+function checking(check) {
+    var splitChars = ".";
+    if((check in window) !== true || (check in this) !== true) {
+        if (check.indexOf(splitChars) >= 1) {
+            var split = check.split(".");
+            var firstWord = window[split[0]];
+            var lastWord = new Object(split[split.length - 1]);
+            if (lastWord in firstWord != true && lastWord in firstWord.prototype != true) {
+                return check;
+            }
+        } else {
+            return check;
+        }
+    }
 }
 
 function loadPolyfill(url, scriptToPolyfill, functionToRunonLoad) {
-	if(url !== "") {
-		var polyfill = document.createElement('script');
-		polyfill.src = ('https://polyfill.io/v3/polyfill.min.js?features='+encodeURIComponent(url));
-		polyfill.onerror = function(response) {
-			console.error("Loading the polyfill(s) failed!", response);
-		} 
-		polyfill.onload = function() {
-			loadMyScript(scriptToPolyfill, functionToRunonLoad)
-		}
+    if(url !== "") {
+        var polyfill = document.createElement("script");
+        polyfill.src = polyfillio + encodeURIComponent(url);
+        polyfill.onerror = function(response) {
+            console.error("Loading the polyfill(s) failed!", response);
+        };
+        polyfill.onload = function() {
+            loadMyScript(scriptToPolyfill, functionToRunonLoad);
+        };
         document.body.appendChild(polyfill);
-	} else {
-	    loadMyScript(scriptToPolyfill, functionToRunonLoad)
-	}
+    } else {
+        loadMyScript(scriptToPolyfill, functionToRunonLoad);
+    }
 }
 
 function loadMyScript(url, functionToRunonLoad) {
-    if (Array.isArray(url)) {
+    if(Array.isArray(url)) {
         var promises = [];
         url.forEach(
             function(url) {
-                promises.push(nonblankURL(url))
+                promises.push(nonblankURL(url));
             }
         );
-        Promise.all(promises)
-            .then(
-                function() {
-                    initialiseMyScript(functionToRunonLoad)
-                }
-            )
-            .catch(
-                function(error) {
-                    return error
-                }
-            )
-    } else if (!Array.isArray(url) && url !== null && url !== '') {
-        nonblankURL(url)
-            .then(
-                function() {
-                    initialiseMyScript(functionToRunonLoad)
-                }
-            )
-            .catch(
-                function(error) {
-                    return error
-                }
-            )
+        Promise.all(promises).then(
+            function() {
+                initialiseMyScript(functionToRunonLoad);
+            }
+        ).catch(function(error) {return error;});
+    } else if(!Array.isArray(url) && url !== null && url !== "") {
+        nonblankURL(url).then(
+            function() {
+                initialiseMyScript(functionToRunonLoad);
+            }
+        ).catch(function(error) {return error;});
     } else {
-        initialiseMyScript(functionToRunonLoad)
+        initialiseMyScript(functionToRunonLoad);
     }
 }
 
 function nonblankURL(uri) {
-    return new Promise (
-        function(resolve,reject) {
-            var thescript = document.createElement('script');
+    return new Promise(
+        function (resolve, reject) {
+            var thescript = document.createElement("script");
             thescript.src = encodeURI(uri);
             thescript.onerror = function(response) {
-                return reject('Loading the script failed!', response)
-            }
+                return reject("Loading the script failed!", response);
+            };
             thescript.onload = function() {
-                return resolve(uri)
-            }
-            document.body.appendChild(thescript)
+                return resolve(uri);
+            };
+            document.body.appendChild(thescript);
         }
-    )
+    );
 }
 
 function initialiseMyScript(functionToRunonLoad) {
-    if (Array.isArray(functionToRunonLoad)) {
+    if(Array.isArray(functionToRunonLoad)) {
         functionToRunonLoad.forEach(
-            function(functionToRunonLoad) {
-                initScript(functionToRunonLoad)
+            function (functionToRunonLoad) {
+                initScript(functionToRunonLoad);
             }
-        )
+        );
     } else {
-        initScript(functionToRunonLoad)
+        initScript(functionToRunonLoad);
     }
+
     function initScript(fn) {
         try {
             var run = new Function(fn);
-	        run()
-        }
-        catch (err) {
-            console.error('There was an error: ', err, err.name, err.stack)
+            run();
+        } catch(err) {
+            console.error("There was an error: ", err, err.name, err.stack);
         }
     }
 }
