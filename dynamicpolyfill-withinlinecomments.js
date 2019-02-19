@@ -93,7 +93,7 @@ function loadMyScript(url, functionToRunonLoad) {
 
 function nonblankURL(uri) {
     return new Promise( //we need to return a promise response, as the init will be dependent on this having loaded
-        function (resolve, reject) { //we're either going to resolve or reject
+        function(resolve, reject) { //we're either going to resolve or reject
             var thescript = document.createElement("script"); //create a script element
             thescript.src = encodeURI(uri); //add the src value and encode the uri being passed as a URI (so it actually loads!)
             thescript.onerror = function(response) { //create an onError value for the script element, so we know if loading the script fails
