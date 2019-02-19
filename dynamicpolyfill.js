@@ -93,7 +93,7 @@ function loadMyScript(url, functionToRunonLoad) {
 
 function nonblankURL(uri) {
     return new Promise(
-        function (resolve, reject) {
+        function(resolve, reject) {
             var thescript = document.createElement("script");
             thescript.src = encodeURI(uri);
             thescript.onerror = function(response) {
@@ -110,7 +110,7 @@ function nonblankURL(uri) {
 function initialiseMyScript(functionToRunonLoad) {
     if(Array.isArray(functionToRunonLoad)) {
         functionToRunonLoad.forEach(
-            function (functionToRunonLoad) {
+            function(functionToRunonLoad) {
                 initScript(functionToRunonLoad);
             }
         );
