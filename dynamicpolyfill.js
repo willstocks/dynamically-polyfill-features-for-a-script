@@ -1,7 +1,7 @@
 const polyfillio = "https://polyfill.io/v3/polyfill.min.js?features=";
 
 function dynamicPolyfill(tocheck, scriptToPolyfill, functionToRunonLoad) {
-    if(typeof Promise !== "undefined" || "Promise" in this) {
+    if(typeof Promise !== "undefined" || window.hasOwnProperty("Promise")) {
         var polyfillReq = [];
         if(Array.isArray(tocheck)) {
             tocheck.forEach(
@@ -37,12 +37,12 @@ function promiFill(tocheck, scriptToPolyfill, functionToRunonLoad) {
 
 function checking(check) {
     var splitChars = ".";
-    if((check in window) !== true || (check in this) !== true) {
+    if(window.hasOwnProperty(check)!== true || (typeof this.check !== 'function') !== true || (check in this) !== true) {
         if (check.indexOf(splitChars) >= 1) {
             var split = check.split(".");
-            var firstWord = window[split[0]];
+            var firstWord = (split[0] === "window" ? split[0] : window[split[0]]);
             var lastWord = new Object(split[split.length - 1]);
-            if (lastWord in firstWord != true && lastWord in firstWord.prototype != true) {
+            if ((firstWord.prototype.hasOwnProperty(lastWord) !== true) && (firstWord.hasOwnProperty(lastWord) !== true) && (lastWord in firstWord !== true)) {
                 return check;
             }
         } else {
