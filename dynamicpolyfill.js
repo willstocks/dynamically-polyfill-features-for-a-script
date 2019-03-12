@@ -37,7 +37,7 @@ function promiFill(tocheck, scriptToPolyfill, functionToRunonLoad) {
 
 function checking(check) {
     var splitChars = ".";
-    if(window.hasOwnProperty(check)!== true || (check in this) !== true) {
+    if(window.hasOwnProperty(check)!== true || (typeof this.check !== 'function') !== true || (check in this) !== true) {
         if (check.indexOf(splitChars) >= 1) {
             var split = check.split(".");
             var firstWord = (split[0] === "window" ? split[0] : window[split[0]]);
