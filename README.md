@@ -22,8 +22,25 @@ See [deployment](#deployment) for notes on how to deploy the project on a live s
 Make sure you know what features your script is reliant on and polyfill those not natively supported on the browsers you support (you can check https://caniuse.com/).
 
 ## Deployment
-	
-### Loading locally (recommended):
+
+### Loading via NPM
+1. Run `npm i dynamic-polyfiller`
+1. Import in your app (example below for React):
+```js
+import React from 'react';  
+import {render} from 'react-dom';  
+
+//The import below is the bit you need!
+import dynamicPolyfill from 'dynamic-polyfiller';
+
+dynamicPolyfill(
+  ["IntersectionObserver", "Object.assign"],
+  'https://cdn.jsdelivr.net/npm/quicklink@1.0.0/dist/quicklink.umd.js',
+  'quicklink();'
+);
+```
+
+### Loading locally (recommended as is easiest):
 1. Copy the contents of [dynamicpolyfill.js](https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/blob/master/dynamicpolyfill.js)
 1. Paste it into your existing JS file(s)
 1. Add a new line after it and call `dynamicPolyfill();` _Note: Case-sensitive_
