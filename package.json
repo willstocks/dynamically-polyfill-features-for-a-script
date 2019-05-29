@@ -1,6 +1,6 @@
 {
   "name": "dynamic-polyfiller",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A small, lightweight script to check for native browser feature support - only polyfill when necessary (using the polyfill.io service), no wasted requests on browsers that have native support!",
   "main": "dynamicpolyfill.js",
   "scripts": {
