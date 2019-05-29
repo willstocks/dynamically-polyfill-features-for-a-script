@@ -1,0 +1,25 @@
+{
+  "name": "dynamic-polyfiller",
+  "version": "0.0.9",
+  "description": "A small, lightweight script to check for native browser feature support - only polyfill when necessary (using the polyfill.io service), no wasted requests on browsers that have native support!",
+  "main": "dynamicpolyfill.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script.git"
+  },
+  "keywords": [
+    "polyfill",
+    "dynamic",
+    "polyfill.io",
+	"javascript"
+  ],
+  "author": "Will Stocks <will@willstocks.co.uk> (https://willstocks.co.uk)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script/issues"
+  },
+  "homepage": "https://github.com/willstocks-tech/dynamically-polyfill-features-for-a-script#readme"
+}

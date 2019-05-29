@@ -127,3 +127,5 @@ function initialiseMyScript(functionToRunonLoad) {
         }
     }
 }
+
+module.exports = dynamicPolyfill;
